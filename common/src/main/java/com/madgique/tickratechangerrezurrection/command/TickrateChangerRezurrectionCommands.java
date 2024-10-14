@@ -10,9 +10,9 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.MinecraftServer;
 
 import static net.minecraft.ChatFormatting.*;
@@ -89,9 +89,9 @@ public class TickrateChangerRezurrectionCommands {
     }
 
     private static int showHelp(CommandSourceStack source) {
-        source.sendSuccess(new TextComponent("Usage: /tickrate [ticks per second] [help/info]"), false);
-        source.sendSuccess(new TextComponent("/tickrate help - Shows this help message"), false);
-        source.sendSuccess(new TextComponent("/tickrate info - Displays the current tickrate"), false);
+        source.sendSuccess(Component.literal("Usage: /tickrate [ticks per second] [help/info]"), false);
+        source.sendSuccess(Component.literal("/tickrate help - Shows this help message"), false);
+        source.sendSuccess(Component.literal("/tickrate info - Displays the current tickrate"), false);
         return 1;
     }
 
@@ -106,32 +106,32 @@ public class TickrateChangerRezurrectionCommands {
         Style exampleMessagesStyle = Style.EMPTY.withColor(AQUA);
         Style helpMessagesStyle = Style.EMPTY.withColor(RED);
 
-        TextComponent currentClientTickrateMessage = new TextComponent("Current Client Tickrate:" + SPACE);
-        TextComponent currentServerTickrateMessage = new TextComponent("Current Server Tickrate:" + SPACE);
-        TextComponent defaultTickrateMessage = new TextComponent("Default Tickrate:" + SPACE);
+        MutableComponent currentClientTickrateMessage = Component.literal("Current Client Tickrate:" + SPACE);
+        MutableComponent currentServerTickrateMessage = Component.literal("Current Server Tickrate:" + SPACE);
+        MutableComponent defaultTickrateMessage = Component.literal("Default Tickrate:" + SPACE);
 
-        TextComponent example1Message = new TextComponent("/tickrate <ticks per second> [all/server/client/ playername ]");
-        TextComponent example2Message = new TextComponent("/tickrate setdefault <ticks per second> [--dontsave, --dontupdate]");
-        TextComponent example3Message = new TextComponent("/tickrate setmap <ticks per second> [--dontupdate]");
+        MutableComponent example1Message = Component.literal("/tickrate <ticks per second> [all/server/client/ playername ]");
+        MutableComponent example2Message = Component.literal("/tickrate setdefault <ticks per second> [--dontsave, --dontupdate]");
+        MutableComponent example3Message = Component.literal("/tickrate setmap <ticks per second> [--dontupdate]");
 
 
-        MutableComponent help1 = new TextComponent("Use" + SPACE).setStyle(helpMessagesStyle);
-        MutableComponent help2 = new TextComponent("/tickrate help" + SPACE).setStyle(Style.EMPTY);
-        MutableComponent help3 = new TextComponent("for more command info").setStyle(helpMessagesStyle);
+        MutableComponent help1 = Component.literal("Use" + SPACE).setStyle(helpMessagesStyle);
+        MutableComponent help2 = Component.literal("/tickrate help" + SPACE).setStyle(Style.EMPTY);
+        MutableComponent help3 = Component.literal("for more command info").setStyle(helpMessagesStyle);
         MutableComponent helpInfoMessage = help1.append(help2).append(help3);
 
-        MutableComponent currentClientTickrateValueMessage = new TextComponent(currentClientTickrate + SPACE + "ticks per second").setStyle(currentMessagesStyle);
-        MutableComponent currentServerTickrateValueMessage = new TextComponent(currentServerTickrate + SPACE + "ticks per second").setStyle(currentMessagesStyle);
-        MutableComponent defaultTickrateValueMessage = new TextComponent(defaultTickrate + SPACE + "ticks per second").setStyle(defautMessagesStyle);
+        MutableComponent currentClientTickrateValueMessage = Component.literal(currentClientTickrate + SPACE + "ticks per second").setStyle(currentMessagesStyle);
+        MutableComponent currentServerTickrateValueMessage = Component.literal(currentServerTickrate + SPACE + "ticks per second").setStyle(currentMessagesStyle);
+        MutableComponent defaultTickrateValueMessage = Component.literal(defaultTickrate + SPACE + "ticks per second").setStyle(defautMessagesStyle);
 
         source.sendSuccess(currentClientTickrateMessage.append(currentClientTickrateValueMessage), false);
         source.sendSuccess(currentServerTickrateMessage.append(currentServerTickrateValueMessage), false);
         source.sendSuccess(defaultTickrateMessage.append(defaultTickrateValueMessage), false);
-        source.sendSuccess(new TextComponent(SPACE), false);
+        source.sendSuccess(Component.literal(SPACE), false);
         source.sendSuccess(example1Message.setStyle(exampleMessagesStyle), false);
         source.sendSuccess(example2Message.setStyle(exampleMessagesStyle), false);
         source.sendSuccess(example3Message.setStyle(exampleMessagesStyle), false);
-        source.sendSuccess(new TextComponent(SPACE), false);
+        source.sendSuccess(Component.literal(SPACE), false);
         source.sendSuccess(helpInfoMessage, false);
 
         return 1;

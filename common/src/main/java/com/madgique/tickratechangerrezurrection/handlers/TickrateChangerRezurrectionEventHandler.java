@@ -4,6 +4,7 @@ import com.madgique.tickratechangerrezurrection.command.TickrateChangerRezurrect
 import com.mojang.brigadier.CommandDispatcher;
 
 import dev.architectury.event.events.common.CommandRegistrationEvent;
+import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 
@@ -16,6 +17,7 @@ public enum TickrateChangerRezurrectionEventHandler {
     }
 
     private void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher,
+                                  CommandBuildContext context,
                                   Commands.CommandSelection selection) {
         TickrateChangerRezurrectionCommands.register(dispatcher);
     }
